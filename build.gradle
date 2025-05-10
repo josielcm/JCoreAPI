@@ -19,11 +19,16 @@ repositories {
     maven { url = uri('https://jitpack.io') }
 }
 
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30' 
+}
+
 subprojects {
     apply plugin: 'java'
 
 
-    souceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
     repositories {
@@ -37,40 +42,7 @@ subprojects {
         maven { url = uri('https://repo.aikar.co/content/groups/aikar/') }
     }
 
-    taskWithType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
     }
 }
-
-// def targetJavaVersion = 21
-// java {
-//     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-//     sourceCompatibility = javaVersion
-//     targetCompatibility = javaVersion
-//     if (JavaVersion.current() < javaVersion) {
-//         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-//     }
-// }
-
-// tasks.withType(JavaCompile).configureEach {
-//     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-//         options.release = targetJavaVersion
-//     }
-// }
-
-// processResources {
-//     def props = [version: version]
-//     inputs.properties props
-//     filteringCharset 'UTF-8'
-//     filesMatching('plugin.yml') {
-//         expand props
-//     }
-// }
-
-// shadowJar {
-//     relocate 'dev.triumphteam.triumph.gui', 'me.josielcm.triumphgui'
-//     relocate 'co.aikar.commands', 'me.josielcm.commands'
-//     relocate 'co.aikar.locales', 'me.josielcm.locales'
-// }
-
-// build.dependsOn shadowJar
