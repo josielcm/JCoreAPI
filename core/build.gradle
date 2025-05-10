@@ -1,3 +1,13 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
 dependencies {
     implementation 'org.mongodb:mongodb-driver-sync:5.3.0'
 }
