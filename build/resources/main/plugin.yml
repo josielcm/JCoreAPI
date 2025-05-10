@@ -1,6 +1,0 @@
-name: Base
-version: '1.0'
-main: me.josielcm.jcm.Base
-api-version: '1.20'
-api: '1.20'
-load: POSTWORLD

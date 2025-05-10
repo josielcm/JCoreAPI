@@ -19,11 +19,6 @@ repositories {
     maven { url = uri('https://jitpack.io') }
 }
 
-dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30' 
-}
-
 subprojects {
     apply plugin: 'java'
 
@@ -40,6 +35,11 @@ subprojects {
         maven { url = uri('https://repo.extendedclip.com/releases/') }
         maven { url = uri('https://repo.pyr.lol/snapshots/') }
         maven { url = uri('https://repo.aikar.co/content/groups/aikar/') }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30' 
     }
 
     tasks.withType(JavaCompile).configureEach {
