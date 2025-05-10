@@ -1,4 +1,26 @@
-build/temp
-build/tmp
-build/classes
-.class
+# Ignore IntelliJ IDEA project files and configurations
+.idea.
+*.iml
+
+.vscode/
+
+# Ignore build output directories
+/build/
+out/
+
+# Ignore macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Ignore Gradle-related files except the wrapper JAR
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ignore temporary, log, and backup files
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Ignore environment variable files
+.env
