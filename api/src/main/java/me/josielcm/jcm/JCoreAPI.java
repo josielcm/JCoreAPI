@@ -9,11 +9,20 @@ import me.josielcm.jcm.logger.Log.LogLevel;
 import me.josielcm.jcm.regions.selector.SelectorManager;
 import me.josielcm.jcm.utils.Key;
 
+/**
+ * Clase principal de la API que sigue el patrón Singleton.
+ * Proporciona acceso centralizado a las funcionalidades de la API.
+ * 
+ * @author JosielCM
+ */
 public class JCoreAPI {
 
     @Getter
-    private static JCoreAPI instance;
+    private static final JCoreAPI instance = new JCoreAPI();
 
+    @Getter
+    private static JavaPlugin plugin;
+    
     @Getter
     private static SelectorManager selectorManager;
     
@@ -25,40 +34,37 @@ public class JCoreAPI {
     @Setter
     private static boolean debug = false;
 
-    @Getter
-    @Setter
-    private JavaPlugin plugin;
+    private JCoreAPI() {}
 
-    public static void init(JavaPlugin plugin) {
-        if (instance == null) {
-            instance = new JCoreAPI();
-        }
-
+    /**
+     * Inicializa de la API
+     * @param pluginInstance El plugin que está inicializando la API
+     */
+    public static void init(JavaPlugin pluginInstance) {
+        
         if (isEnabled()) {
-            Log.log(LogLevel.WARNING, "JCoreAPI is already initialized cannot be initialized again.");
+            Log.log(LogLevel.WARNING, "JCoreAPI is already initialized and cannot be initialized again.");
+            Log.onInit(true);
             return;
         }
 
-        if (plugin == null) {
-            Log.log(LogLevel.ERROR, "Error loading JCoreAPI: plugin cannot be null");
+        if (pluginInstance == null) {
+            Log.log(LogLevel.ERROR, "JCoreAPI cannot be initialized with a null plugin instance.");
+            Log.onInit(true);
             return;
         }
 
+        plugin = pluginInstance;
+        
         Key.instanceKeys(plugin);
         selectorManager = new SelectorManager();
 
         setEnabled(true);
-        Log.onInit(!isEnabled());
+        Log.onInit(!enabled);
     }
 
     public static void shutdown() {
-        if (instance == null) {
-            return;
-        }
-
-        instance = null;
         setEnabled(false);
         Log.onShutdown();
     }
-
 }

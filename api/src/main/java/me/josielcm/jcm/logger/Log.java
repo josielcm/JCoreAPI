@@ -50,11 +50,11 @@ public class Log {
     }
     
     public static void log(LogLevel level, String message)  {
-        JCoreAPI.getInstance().getPlugin().getServer().getConsoleSender().sendMessage(Color.parse(level.getPrefix() + message));
+        JCoreAPI.getPlugin().getServer().getConsoleSender().sendMessage(Color.parse(level.getPrefix() + message));
     }
 
     public static void log(String message) {
-        JCoreAPI.getInstance().getPlugin().getServer().getConsoleSender().sendMessage(Color.parse(LogLevel.INFO.getPrefix() + message));
+        JCoreAPI.getPlugin().getServer().getConsoleSender().sendMessage(Color.parse(LogLevel.INFO.getPrefix() + message));
     }
 
     public static void logError(String message, Exception e) {
